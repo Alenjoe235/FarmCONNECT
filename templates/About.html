@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - FarmConnect</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="MainPage.html" class="logo">
+                    <img src="logo.jpg" alt="Website Logo" width="200">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="card bg-light shadow-lg">
+            <div class="card-body p-5">
+                <h1 class="display-4 text-center mb-3">About</h1>
+                <h2 class="text-success text-center mb-4">FarmConnect</h2>
+                <p class="text-muted text-center mb-4">
+                    Developed by Alen Joe Benny
+                </p>
+                <p class="lead">
+                    FarmConnect is a digital platform designed to foster a direct connection between local farmers and consumers, 
+                    with a focus on reducing food waste, promoting sustainable agriculture practices, and supporting local communities. 
+                    The platform serves as a marketplace where consumers can discover and purchase fresh, locally sourced produce directly 
+                    from farmers, while farmers can efficiently sell their products and reduce waste by selling surplus or imperfect produce.
+                </p>
+                <div class="text-center mt-4">
+                    <button onclick="goBack()" class="btn btn-success btn-lg px-4">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

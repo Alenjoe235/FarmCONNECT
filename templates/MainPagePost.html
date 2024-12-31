@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center; /* Center align the tabs */
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+        .tab {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-right: 10px; /* Added margin between tabs */
+        }
+        .tab:last-child {
+            margin-right: 0; /* Remove margin for the last tab */
+        }
+        .post-button {
+            background-color: #4CAF50; /* Change background color to green */
+            color: white; /* Change text color to white */
+        }
+        .post {
+            padding: 20px;
+            background-color: #f9f9f9;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .post h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href=" MainPage.html"> <img src="logo.jpg" alt="Website Logo" width="200px"></a>
+        <div>
+            <button class="tab"><a href="about.html" style="text-decoration: none; color: inherit;">About</a></button>
+            <button class="tab"><a href="cart.html" style="text-decoration: none; color: inherit;">Cart</a></button>
+            <button class="tab"><a href="Profile.html" style="text-decoration: none; color: inherit;">Profile</a></button>
+            <a href="plus.html" style="text-decoration: none; color: inherit;"><button class="tab">Plus</button></a>
+        </div>
+    </div>
+    <div class="tabs">
+        <button class="tab"><a href="MainPageMap.html" style="text-decoration: none; color: inherit;">Maps</a></button>
+        <button class="tab post-button">Posts</button>
+        <button class="tab"><a href="MainPageBuy.html" style="text-decoration: none; color: inherit;">Buy</a></button>
+        <button class="tab"><a href="MainPageSell.html" style="text-decoration: none; color: inherit;">Sell</a></button>
+    </div>
+
+    <div id="postsContainer"></div>
+
+    <script>
+        // Fetch data from the SheetDB API
+        fetch('https://sheetdb.io/api/v1/t6dzkkm7gl010')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Iterate through each post and create HTML elements to display them
+                const postsContainer = document.getElementById('postsContainer');
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('post');
+                    postElement.innerHTML = `
+                        <h2>${post.name}</h2>
+                        <p>${post.blog}</p>
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+            })
+            .catch(error => console.error('Error fetching posts:', error));
+    </script>
+</body>
+</html>

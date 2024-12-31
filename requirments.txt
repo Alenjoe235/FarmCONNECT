@@ -1,0 +1,4 @@
+express 
+sqlite3 
+bcrypt express-session 
+connect-sqlite3 helmet

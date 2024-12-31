@@ -1,0 +1,296 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('Canva-Farmer-in-sugar-beet-field-1-scaled.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.header {
+    background-color: rgba(76, 175, 80, 0.9);
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo img {
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+.nav-tabs .tab {
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+    color: white;
+}
+
+.nav-tabs .tab:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+.hero-section {
+    min-height: 100vh;
+    padding: 80px 0;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.hero-content {
+    color: white;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.info-card {
+    background-color: rgba(255,255,255,0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+    color: #333;
+}
+
+/* Additional styles for About and Cart pages */
+.card {
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+}
+
+.display-4, .display-6 {
+    font-weight: 600;
+}
+
+.lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* ...existing styles... */
+
+.map-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 60px 0;
+}
+
+.farmer-image-container {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.farmer-image-container:hover {
+    transform: translateY(-5px);
+}
+
+.farmer-info {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.hover-effect {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#nearestLocation {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#nearestLocation::-webkit-scrollbar {
+    width: 6px;
+}
+
+#nearestLocation::-webkit-scrollbar-thumb {
+    background-color: rgba(76, 175, 80, 0.5);
+    border-radius: 3px;
+}
+
+.map-section .card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.map-section .card:hover {
+    transform: translateY(-5px);
+}
+
+#nearestLocation {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.2);
+    color: #2e7d32;
+    margin-top: 20px;
+}
+
+#nearestLocation ul li {
+    padding: 8px;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+#nearestLocation ul li:hover {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+/* ...existing styles... */
+
+.market-intro {
+    background-color: rgba(255, 255, 255, 0.9);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.market-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.market-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#marketSection {
+    scroll-margin-top: 80px;
+}
+
+.input-group .form-control {
+    border: 2px solid rgba(76, 175, 80, 0.2);
+}
+
+.input-group .form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+/* ...existing styles... */
+
+.market-preview {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
+    position: relative;
+    z-index: 1;
+}
+
+.market-preview-content {
+    padding: 2rem;
+}
+
+.featured-item {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.featured-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-color: #4CAF50;
+}
+
+.product-emoji {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.market-preview-image {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.market-preview-image:hover {
+    transform: scale(1.02);
+}
+
+.floating-tag {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ...existing styles... */

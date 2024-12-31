@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farming Information Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
+  
+  form {
+    background-color: #fff;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  
+  .success {
+    color: green;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+
+  /* Style for back button */
+  .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<form id="profile-form">
+  <h2>Farming Information</h2>
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" required>
+
+  <label for="phone">Phone Number</label>
+  <input type="tel" id="phone" name="phone">
+
+  <label for="location">Location</label>
+  <input type="text" id="location" name="location" required>
+
+  <label for="farmingtype">Type of Farming</label>
+  <select id="farmingtype" name="farmingtype" required>
+    <option value="">Select farming type</option>
+    <option value="Crop farming">Crop farming</option>
+    <option value="Livestock farming">Livestock farming</option>
+    <option value="Diary farming">Diary farming</option>
+  </select>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="description" rows="4" required></textarea>
+
+  <input type="submit" value="Submit">
+</form>
+
+<button class="back-button" onclick="goBack()">Back</button>
+
+<script>
+  // Function to clear form fields
+  function clearForm() {
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("farmingtype").value = "";
+    document.getElementById("description").value = "";
+  }
+
+  // Function to go back
+  function goBack() {
+    window.history.back();
+  }
+
+  // Submit form and clear fields
+  document.getElementById("profile-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    
+    // Get form data
+    const formData = new FormData(this);
+    const formObject = {};
+    formData.forEach(function(value, key){
+      formObject[key] = value;
+    });
+
+    // Send form data to the server
+    fetch("/submit-profile", {
+      method: "POST",
+      body: JSON.stringify(formObject),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      // Display success message (optional)
+      alert("Form submitted successfully!");
+      // Clear form fields
+      clearForm();
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      // Handle errors here
+    });
+  });
+</script>
+
+</body>
+</html>

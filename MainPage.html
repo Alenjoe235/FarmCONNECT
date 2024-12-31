@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="MainPage.html" class="logo">
+                    <img src="logo.jpg" alt="Website Logo" width="200">
+                </a>
+                <nav class="nav-tabs">
+                    <a href="About.html" class="tab btn">About</a>
+                    <a href="cart.html" class="tab btn">Cart</a>
+                    <a href="profile.html" class="tab btn">Profile</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-tabs py-3 bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <a href="MainPageMap.html" class="tab btn">Maps</a>
+                <a href="MainPagePost.html" class="tab btn">Posts</a>
+                <a href="MainPageBuy.html" class="tab btn">Buy</a>
+                <a href="MainPageSell.html" class="tab btn">Sell</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="mb-4">Connecting Farmers and Consumers for a Sustainable Future</h1>
+                <h2 class="mb-5">Discover fresh, locally sourced produce and support your local farmers</h2>
+                
+                <div class="info-card">
+                    <h2 class="mb-3">Supporting Farmers, Empowering Communities</h2>
+                    <p class="lead">
+                        FarmConnect is a digital platform that brings local farmers and consumers together, promoting sustainable agriculture practices
+                        and reducing food waste. By connecting directly with farmers, consumers can discover and purchase fresh, locally sourced produce while supporting their local communities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-lg">
+                        <div class="card-body text-center">
+                            <h2 class="display-6 mb-4">Find Products Near You</h2>
+                            <p class="lead mb-4">Discover local farmers and fresh produce in your area</p>
+                            <button id="getLocationBtn" class="btn btn-success btn-lg mb-4">
+                                <i class="bi bi-geo-alt-fill me-2"></i>Find Nearest Locations
+                            </button>
+                            <div id="nearestLocation" class="alert alert-success d-none"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="farmer-image-container">
+                        <img src="farmer1.jpg" alt="Local Farmer" class="img-fluid rounded shadow-lg">
+                        <div class="farmer-info mt-3">
+                            <h3>Connected Farming Community</h3>
+                            <p>Direct access to local farmers and fresh produce</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="market-preview py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="market-preview-content">
+                        <h2 class="display-6 mb-4">Today's Fresh Picks</h2>
+                        <p class="lead mb-4">Browse through our marketplace for fresh, locally sourced produce directly from farmers.</p>
+                        <div class="featured-products mb-4">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="featured-item p-3 rounded">
+                                        <span class="product-emoji">🥕</span>
+                                        <h5>Fresh Vegetables</h5>
+                                        <small class="text-success">From ₹40/kg</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="featured-item p-3 rounded">
+                                        <span class="product-emoji">🍎</span>
+                                        <h5>Organic Fruits</h5>
+                                        <small class="text-success">From ₹60/kg</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="MainPageBuy.html" class="btn btn-success btn-lg">
+                            Visit Marketplace
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="market-preview-image">
+                        <img src="marketplace.jpg" alt="Fresh Produce" class="img-fluid rounded-3 shadow-lg">
+                        <div class="floating-tag">
+                            <span class="badge bg-success p-3">
+                                <i class="bi bi-bag-check me-2"></i>
+                                Direct from Farmers
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        document.querySelector('a[href="MainPageMap.html"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.map-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Predefined locations (latitude, longitude)
+        var predefinedLocations = {
+            "Organic Farm Market": { "latitude":8.5485, "longitude": 76.9184, "products": ["Vegetables", "Fruits"] },
+            "Green Valley Produce": { "latitude": 8.4901, "longitude": 76.9535, "products": ["Organic Grains", "Dairy"] },
+            "Fresh Farm Stand": { "latitude": 8.7333, "longitude": 76.7167, "products": ["Fresh Fruits", "Honey"] },
+            "Local Harvest Hub": { "latitude": 8.593, "longitude": 77.0123, "products": ["Vegetables", "Eggs"] },
+            "Nature's Best Farm": { "latitude": 8.6952, "longitude":76.8113, "products": ["Organic Vegetables", "Herbs"] },
+            "Farm Fresh Store": { "latitude": 8.4009, "longitude":76.9788, "products": ["Fresh Produce", "Local Goods"] },
+            "Farmers Market": { "latitude": 8.4065, "longitude": 77.0932, "products": ["Mixed Produce", "Artisan Foods"] }
+        };
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            var R = 6371;
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function getLocation() {
+            const locationDiv = document.getElementById("nearestLocation");
+            locationDiv.classList.remove('d-none');
+            
+            if (navigator.geolocation) {
+                locationDiv.innerHTML = "Finding nearest locations...";
+                navigator.geolocation.getCurrentPosition(showNearestLocations, handleLocationError);
+            } else {
+                locationDiv.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showNearestLocations(position) {
+            const userLatitude = position.coords.latitude;
+            const userLongitude = position.coords.longitude;
+            const locationDiv = document.getElementById("nearestLocation");
+
+            let locations = Object.entries(predefinedLocations)
+                .map(([name, data]) => ({
+                    name,
+                    distance: calculateDistance(userLatitude, userLongitude, data.latitude, data.longitude),
+                    products: data.products
+                }))
+                .sort((a, b) => a.distance - b.distance)
+                .slice(0, 3);
+
+            let html = '<h5 class="mb-3">Nearest Locations:</h5><ul class="list-unstyled">';
+            locations.forEach(loc => {
+                html += `
+                    <li class="mb-3 p-3 border rounded hover-effect">
+                        <strong>🌾 ${loc.name}</strong><br>
+                        <span class="text-muted">Distance: ${loc.distance.toFixed(2)} km</span><br>
+                        <small class="text-success">Available: ${loc.products.join(', ')}</small>
+                    </li>`;
+            });
+            html += '</ul>';
+
+            locationDiv.innerHTML = html;
+            locationDiv.classList.remove('d-none');
+        }
+
+        function handleLocationError(error) {
+            const locationDiv = document.getElementById("nearestLocation");
+            locationDiv.innerHTML = `Error: ${error.message}`;
+        }
+
+        document.getElementById("getLocationBtn").addEventListener("click", getLocation);
+    </script>
+</body>
+</html>

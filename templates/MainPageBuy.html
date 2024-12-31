@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy - FarmConnect</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center; /* Center align the tabs */
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+        .tab {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-right: 10px; /* Added margin between tabs */
+        }
+        .tab:last-child {
+            margin-right: 0; /* Remove margin for the last tab */
+        }
+        /* Style for the Buy button */
+        .tabs .tab:nth-child(3) {
+            background-color: #4CAF50; /* Change background color to green */
+            color: white; /* Change text color to white */
+        }
+        .add-to-cart-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="MainPage.html" class="logo">
+                    <img src="logo.jpg" alt="Website Logo" width="200">
+                </a>
+                <nav class="nav-tabs">
+                    <a href="cart.html" class="tab btn">
+                        <i class="bi bi-cart3"></i> Cart
+                    </a>
+                    <a href="MainPage.html" class="tab btn">
+                        <i class="bi bi-house"></i> Home
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="market-intro py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow-lg market-card">
+                        <div class="card-body text-center p-5">
+                            <h1 class="display-4 mb-4">FarmConnect Market</h1>
+                            <p class="lead mb-4">Find fresh, locally sourced produce from farmers near you</p>
+                            <button class="btn btn-success btn-lg px-5" onclick="scrollToMarket()">
+                                <i class="bi bi-shop me-2"></i>Browse Products
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="marketSection" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6 mx-auto">
+                    <div class="input-group">
+                        <input type="text" id="productName" class="form-control form-control-lg" placeholder="Search products...">
+                        <button class="btn btn-success" onclick="searchProducts()">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productList" class="row g-4">
+                <!-- Products will be displayed here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/products')
+                .then(response => response.json())
+                .then(data => {
+                    var productList = document.getElementById("productList");
+                    productList.innerHTML = "";
+
+                    data.forEach(function(product) {
+                        var productCard = document.createElement("div");
+                        productCard.className = "col-md-4";
+                        productCard.innerHTML = `
+                            <div class="card h-100 product-card">
+                                <div class="card-body">
+                                    <h3 class="card-title">${product.productname}</h3>
+                                    <p class="card-text text-success fw-bold">₹${product.priceperkg_l} per kg/l</p>
+                                    <p class="card-text"><small class="text-muted">Farmer: ${product.name}</small></p>
+                                    <p class="card-text">${product.description}</p>
+                                    <button onclick="addToCart('${product.productname}', ${product.priceperkg_l})" 
+                                            class="btn btn-outline-success w-100">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        productList.appendChild(productCard);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+        function scrollToMarket() {
+            document.getElementById('marketSection').scrollIntoView({ 
+                behavior: 'smooth'
+            });
+        }
+
+        function searchProducts() {
+            var productName = document.getElementById("productName").value.toLowerCase();
+            var productList = document.getElementById("productList");
+
+            fetch('/products')
+                .then(response => response.json())
+                .then(data => {
+                    var similarProducts = [];
+                    data.forEach(function(product) {
+                        var similarity = similarityScore(product.productname.toLowerCase(), productName);
+                        if (similarity > 0.5) {
+                            similarProducts.push(product);
+                        }
+                    });
+
+                    productList.innerHTML = "";
+
+                    similarProducts.forEach(function(product) {
+                        var productCard = document.createElement("div");
+                        productCard.className = "col-md-4";
+                        productCard.innerHTML = `
+                            <div class="card h-100 product-card">
+                                <div class="card-body">
+                                    <h3 class="card-title">${product.productname}</h3>
+                                    <p class="card-text text-success fw-bold">₹${product.priceperkg_l} per kg/l</p>
+                                    <p class="card-text"><small class="text-muted">Farmer: ${product.name}</small></p>
+                                    <p class="card-text">${product.description}</p>
+                                    <button onclick="addToCart('${product.productname}', ${product.priceperkg_l})" 
+                                            class="btn btn-outline-success w-100">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        productList.appendChild(productCard);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function addToCart(productname, price) {
+            fetch('/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productname, price }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('Product added to cart!');
+            })
+            .catch(error => console.error('Error adding to cart:', error));
+        }
+
+        function similarityScore(str1, str2) {
+            const similarityThreshold = 0.7;
+            const longerLength = Math.max(str1.length, str2.length);
+            const editDistance = editDistanceScore(str1, str2);
+            const similarity = (longerLength - editDistance) / longerLength;
+            return similarity;
+        }
+
+        function editDistanceScore(str1, str2) {
+            str1 = str1.toLowerCase();
+            str2 = str2.toLowerCase();
+            let matrix = [];
+
+            for (let i = 0; i <= str1.length; i++) {
+                matrix[i] = [i];
+            }
+
+            for (let j = 0; j <= str2.length; j++) {
+                matrix[0][j] = j;
+            }
+
+            for (let i = 1; i <= str1.length; i++) {
+                for (let j = 1; j <= str2.length; j++) {
+                    if (str1[i - 1] === str2[j - 1]) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+
+            return matrix[str1.length][str2.length];
+        }
+    </script>
+</body>
+</html>

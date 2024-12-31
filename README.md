@@ -27,6 +27,9 @@ FarmConnect is a digital platform that connects local farmers with consumers, pr
 
 3. **Set up the SQLite database**:
     The database will be initialized automatically when the server starts.
+#### Video Demo: https://youtu.be/_fcUSv4quG0
+
+
 
 ## Usage
 
